@@ -1,0 +1,78 @@
+<html>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="loginMenu.css">
+    <script src="http://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.js"></script>
+    <script src="jquery.fullpage.min.js"></script>
+    <script src="jquery.loginMenu.js"></script>
+    <script src="typed.js"></script>
+</head>
+
+<body>
+    <div id="fullPage">
+        <section class="intro">
+            <div class="content">
+                <h1>This is full screen sections.</h1>
+
+                <div id="box">
+                        <div id="main"></div>
+                        
+                        <div id="loginform">
+                            <h1>LOGIN</h1>
+                            <input type="email" placeholder="Email"/><br>
+                            <input type="password" placeholder="Password"/><br>
+                            <button>LOGIN</button>
+                        </div>
+                        
+                        <div id="signupform">
+                            <h1>SIGN UP</h1>
+                            <input type="text" placeholder="Full Name"/><br>
+                            <input type="email" placeholder="Email"/><br>
+                            <input type="password" placeholder="Password"/><br>
+                            <button>SIGN UP</button>
+                        </div>
+                        
+                        <div id="login_msg">Have an account?</div>
+                        <div id="signup_msg">Don't have an account?</div>
+                        
+                        <button id="login_btn">LOGIN</button>
+                        <button id="signup_btn">SIGN UP</button>
+                        
+                    </div>
+
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <h1>Second section</h1>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <h1>Another one</h1>
+            </div>
+        </section>
+
+        <section>
+            <div class="content">
+                <h1>The last one</h1>
+            </div>
+        </section>
+
+        <footer>
+            And the footer
+        </footer>
+    </div>
+
+    <script type="text/javascript">
+            $('#fullPage').fullpage();
+            FastClick.attach(document.body);
+    </script>
+
+</body>
+
+</html>
