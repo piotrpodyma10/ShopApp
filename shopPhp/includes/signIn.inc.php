@@ -26,12 +26,8 @@ function checkPassword($password){
 function signIn($login, $password, $dbConnection){
     $sql = "SELECT * FROM Logins WHERE Login='$login'";
     $result = mysqli_query($dbConnection, $sql);
-    $resultCheck = mysqli_num_rows($result);
     
-    if($resultCheck < 1){
-        header("Location: ../index.php?login=invalidData");
-        exit();
-    }else{
+    if(mysqli_num_rows($result) > 0){
         if($row = mysqli_fetch_assoc($result)){
             $isPasswordVerified = password_verify($password, $row['Password']);
             if($isPasswordVerified){
@@ -44,6 +40,9 @@ function signIn($login, $password, $dbConnection){
                 exit();
             }
         }
+    }else{
+        header("Location: ../index.php?login=invalidData");
+        exit();
     }
 }
 ?> 

@@ -23,6 +23,7 @@
     }
 
     $userId = createUser($email, $dbConnection);
+    createCart($userId, $dbConnection);
     createLogin($login, $password, $userId, $dbConnection);
 
     function checkPost(){
@@ -39,8 +40,7 @@
     function isLoginAvailable($login){
         $sql = "SELECT Id FROM Logins WHERE Login='$login'";
         $result = mysqli_query($dbConnection, $sql);
-        $resultCheck = mysqli_num_rows($result);
-        return ($resultCheck == 0);
+        return (mysqli_num_rows($result) == 0);
     }
 
     function isPassworValid($password, $repeatPassword){
@@ -56,6 +56,20 @@
                     (Email) 
                 VALUES
                     ('$email');";
+        $isSuccess = mysqli_query($dbConnection, $sql);
+        if($isSuccess){
+            return mysqli_insert_id($dbConnection);
+        } else {
+            header("Location: ../signUp.php?signup=failed");
+            exit();
+        }
+    }
+
+    function createCart($userId, $dbConnection){
+        $sql = "INSERT INTO Carts 
+                    (UserId) 
+                VALUES
+                    ('$userId');";
         $isSuccess = mysqli_query($dbConnection, $sql);
         if($isSuccess){
             return mysqli_insert_id($dbConnection);
