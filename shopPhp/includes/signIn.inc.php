@@ -29,10 +29,12 @@ function signIn($login, $password, $dbConnection){
     
     if(mysqli_num_rows($result) > 0){
         if($row = mysqli_fetch_assoc($result)){
-            $isPasswordVerified = password_verify($password, $row['Password']);
+            $isPasswordVerified = password_verify($password, $row["Password"]);
             if($isPasswordVerified){
-                $_SESSION['login'] = $row['Login'];
-                $_SESSION['userId'] = $row['UserId'];
+                $_SESSION["login"] = $row["Login"];
+                $_SESSION["userId"] = $row["UserId"];
+                $_SESSION["role"] = $row["Role"];
+                $_SESSION["cartId"] = getCartId($dbConnection);
                 header("Location: ../index.php?login=success");
                 exit();
             }else{
@@ -45,4 +47,12 @@ function signIn($login, $password, $dbConnection){
         exit();
     }
 }
+
+function getCartId($dbConnection){
+    $userId = $_SESSION["userId"];
+    $sql = "SELECT Id FROM Carts WHERE UserId = '$userId'";
+    $result = mysqli_query($dbConnection, $sql);
+    return mysqli_fetch_assoc($result)["Id"];  
+}
+
 ?> 

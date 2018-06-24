@@ -54,6 +54,8 @@
                     <td></td>
             </tfoot>
         </table>
+        
+        <a href="./checkout.php"> Checkout Now </a>
     <?php else: ?>
         <h2> You have no products in your Cart </h2>
         Select something now <a href="catalogue.php">Catalogue</a>

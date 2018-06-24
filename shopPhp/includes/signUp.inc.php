@@ -82,9 +82,9 @@
     function createLogin($login, $password, $userId, $dbConnection){
         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
         $sql = "INSERT INTO Logins 
-                    (Login, Password, UserId) 
+                    (Login, Password, UserId, Role) 
                 VALUES
-                    ('$login', '$hashedPassword', '$userId');";
+                    ('$login', '$hashedPassword', '$userId', 'user');";
         $isSuccess = mysqli_query($dbConnection, $sql);
         if($isSuccess){
             header("Location: ../signUp.php?signup=success");

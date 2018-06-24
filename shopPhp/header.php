@@ -15,6 +15,13 @@
                     <li><a href="catalogue.php">Catalogue</a></li>
                     <?php if (isset($_SESSION['login']) && isset($_SESSION['userId'])): ?>
                         <li><a href="cart.php">Cart</a></li>
+                        <li><a href="orders.php">Orders</a></li>
+                        <?php if (isset($_SESSION['role']) && ($_SESSION['role'] == 'salesman' || $_SESSION['role'] == 'admin')): ?>
+                            <li><a href="OrdersManagement.php">Manage Orders</a></li>
+                            <?php if (isset($_SESSION['role']) && $_SESSION['role'] == 'admin'): ?>
+                                <li><a href="UsersManagement.php">Manage Users</a></li>
+                            <?php endif; ?>
+                        <?php endif; ?>
                     <?php endif; ?>
                 </ul>
                 <div>
