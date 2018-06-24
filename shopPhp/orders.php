@@ -11,21 +11,23 @@
                 <th>#</th>
                 <th>Order</th>
                 <th>Status</th>
-                <th>Price</th>
+                <th>Created Date</th>
+                <th>Total</th>
                 <th>Cancel</th>
             </thead>
             <?php for($i = 0; $i < count($orders); $i++): ?>
                 <tr>
-                    <td><?php echo $i ?></td>
+                    <td><?php echo $i + 1 ?></td>
                     <td><?php echo $orders[$i]["Id"] ?></td>
                     <td><?php echo $orders[$i]["Status"] ?></td>
+                    <td><?php echo $orders[$i]["CreatedDate"] ?></td>
                     <td><?php echo $orders[$i]["Total"] ?></td>
                     <td>
-                        <?php if ($orders[$i]["Status"] == 'Pending'): ?>
+                        <?php if ($orders[$i]["Status"] == 'NEW' || $orders[$i]["Status"] == 'PENDING'): ?>
                             <form action='includes/orders.inc.php' method='GET'>
                                 <input type='hidden' name='orderId' value='<?php echo $orders[$i]["Id"] ?>'/>
-                                <input type='hidden' name='action' value='Cancel'/>
-                                <button type='submit' label='X'>X</button>
+                                <input type='hidden' name='action' value='CANCEL'/>
+                                <button type='submit' label='Cancel'>X</button>
                             </form>
                         <?php endif; ?>
                     </td>

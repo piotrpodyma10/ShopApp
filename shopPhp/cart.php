@@ -17,7 +17,7 @@
             </thead>
             <?php for($i = 0; $i < count($cartItems); $i++): ?>
                 <tr>
-                    <td><?php echo $i ?></td>
+                    <td><?php echo $i + 1 ?></td>
                     <td><img src='<?php echo $cartItems[$i]["ImageUrl"] ?>' width='64px' height='48px'/></td>
                     <td><?php echo $cartItems[$i]["Name"] ?></td>
                     <td><?php echo $cartItems[$i]["UnitPrice"] ?></td>
@@ -26,21 +26,21 @@
                             <form action='includes/cart.inc.php' method='GET'>
                                 <input type='hidden' name='itemId' value='<?php echo $cartItems[$i]["Id"] ?>'/>
                                 <input type='hidden' name='action' value='DECREMENT'/>
-                                <button type='submit' label='-'>-</button>
+                                <button type='submit' label='Subtract'>-</button>
                             </form>
                         <?php endif; ?>
                         <?php echo $cartItems[$i]["Quantity"] ?>
                         <form action='includes/cart.inc.php' method='GET'>
                             <input type='hidden' name='itemId' value='<?php echo $cartItems[$i]["Id"] ?>'/>
                             <input type='hidden' name='action' value='INCREMENT'/>
-                            <button type='submit' label='+'>+</button>
+                            <button type='submit' label='Increment'>+</button>
                         </form>
                     </td>
                     <td>
                         <form action='includes/cart.inc.php' method='GET'>
                             <input type='hidden' name='itemId' value='<?php echo $cartItems[$i]["Id"] ?>'/>
                             <input type='hidden' name='action' value='REMOVE'/>
-                            <button type='submit' label='X'>X</button>
+                            <button type='submit' label='Remove'>X</button>
                         </form>
                     </td>
                 </tr>

@@ -12,12 +12,13 @@
     }
 
     function handleAction($dbConnection){
-        if($_GET['action'] == 'CANCEL'){
+        if($_GET['action'] == 'SAVE'){
             $orderId = $_GET['orderId'];
-            $sql = "UPDATE Orders SET Status='CANCELLED' WHERE id='$orderId'";
+            $status = $_GET['status'];
+            $sql = "UPDATE Orders SET Status='$status' WHERE id='$orderId'";
             mysqli_query($dbConnection, $sql);
-            header("Location: ../orders.php?result=cancelSuccess");
-            exit();            
+            header("Location: ../ordersManagement.php?result=updateSuccess");
+            exit();
         }
     }
 
@@ -27,7 +28,6 @@
 
         $sql = "SELECT Id, Total, CreatedDate, Status
                 FROM Orders 
-                WHERE UserId = '$userId'
                 ORDER BY CreatedDate DESC";
         $result = mysqli_query($dbConnection, $sql);
         while($order = mysqli_fetch_assoc($result)){
@@ -36,3 +36,4 @@
 
         return $orders;
     }
+?>

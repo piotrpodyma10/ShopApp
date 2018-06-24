@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 01 Cze 2018, 19:51
+-- Czas generowania: 24 Cze 2018, 15:57
 -- Wersja serwera: 10.1.31-MariaDB
 -- Wersja PHP: 7.2.4
 
@@ -36,14 +36,6 @@ CREATE TABLE `cartitems` (
   `Unitprice` int(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
---
--- Zrzut danych tabeli `cartitems`
---
-
-INSERT INTO `cartitems` (`Id`, `CartId`, `ProductId`, `Quantity`, `Unitprice`) VALUES
-(3, 1, 1, 1, 1500),
-(4, 1, 1, 1, 1500);
-
 -- --------------------------------------------------------
 
 --
@@ -60,7 +52,9 @@ CREATE TABLE `carts` (
 --
 
 INSERT INTO `carts` (`Id`, `UserId`) VALUES
-(1, 1);
+(2, 1),
+(3, 4),
+(4, 5);
 
 -- --------------------------------------------------------
 
@@ -72,17 +66,20 @@ CREATE TABLE `logins` (
   `Id` int(12) NOT NULL,
   `Login` varchar(64) COLLATE utf8_polish_ci NOT NULL,
   `Password` varchar(64) COLLATE utf8_polish_ci NOT NULL,
-  `UserId` int(12) DEFAULT NULL
+  `UserId` int(12) DEFAULT NULL,
+  `Role` varchar(255) COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
 --
 -- Zrzut danych tabeli `logins`
 --
 
-INSERT INTO `logins` (`Id`, `Login`, `Password`, `UserId`) VALUES
-(1, 'user', '$2y$10$jMXRUKKyaVecl52fMA9tWeKcXnABUKC8DCMgPYYd9mq/qxSBiNKr6', 1),
-(2, 'login', '$2y$10$0C/6lvh/inCF6KiMsl3o..neGg8AfsKiGzEwFofmB2O0EDJqTEeGu', 2),
-(3, 'account', '$2y$10$y//WzqvEGtZRZgkGsZobrO1KmnaMOi7zZS8.0uYjx..h7pLQybezW', 3);
+INSERT INTO `logins` (`Id`, `Login`, `Password`, `UserId`, `Role`) VALUES
+(1, 'user', '$2y$10$jMXRUKKyaVecl52fMA9tWeKcXnABUKC8DCMgPYYd9mq/qxSBiNKr6', 1, 'user'),
+(2, 'login', '$2y$10$0C/6lvh/inCF6KiMsl3o..neGg8AfsKiGzEwFofmB2O0EDJqTEeGu', 2, 'user'),
+(3, 'account', '$2y$10$y//WzqvEGtZRZgkGsZobrO1KmnaMOi7zZS8.0uYjx..h7pLQybezW', 3, 'user'),
+(4, 'Salesman', '$2y$10$Gx1qN63CcqXTVzA7OobXvedGckO9Jtdt5RqWkeEISkZqJe4krhhmq', 4, 'salesman'),
+(5, 'admin', '$2y$10$cJot5iIcHmWFZffG.QXeCuaA65mGAFkkAyA4D.LwWz//TCT1j.N8C', 5, 'admin');
 
 -- --------------------------------------------------------
 
@@ -107,6 +104,22 @@ CREATE TABLE `orderdetails` (
   `Notes` varchar(512) COLLATE utf8_polish_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Zrzut danych tabeli `orderdetails`
+--
+
+INSERT INTO `orderdetails` (`Id`, `OrderId`, `FirstName`, `LastName`, `PhoneNumber`, `Email`, `Street`, `HouseNumber`, `FlatNumber`, `City`, `PostalCode`, `State`, `Country`, `Notes`) VALUES
+(14, 14, 'User', 'Password', '123456789', 'user@password.pl', 'Agrestowa', '1', '', 'Wroc?aw', '53-006', 'dolno?l?skie', 'Polska', NULL),
+(15, 15, 'admin', 'admin', '123456789', 'admin@admin.com', 'Admin St.', '1', '2', 'Admin City', '12-345', 'Admino', 'Admin Land', NULL);
+
+--
+-- Wyzwalacze `orderdetails`
+--
+DELIMITER $$
+CREATE TRIGGER `onAfterOrderDetailsInsertUpdateOrder` AFTER INSERT ON `orderdetails` FOR EACH ROW UPDATE Orders SET OrderDetailsId = NEW.Id WHERE Id = NEW.OrderId
+$$
+DELIMITER ;
+
 -- --------------------------------------------------------
 
 --
@@ -121,6 +134,14 @@ CREATE TABLE `orderitems` (
   `Unitprice` int(32) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
 
+--
+-- Zrzut danych tabeli `orderitems`
+--
+
+INSERT INTO `orderitems` (`Id`, `OrderId`, `ProductId`, `Quantity`, `Unitprice`) VALUES
+(10, 14, 2, 2, 11000),
+(11, 15, 2, 3, 11000);
+
 -- --------------------------------------------------------
 
 --
@@ -129,10 +150,28 @@ CREATE TABLE `orderitems` (
 
 CREATE TABLE `orders` (
   `Id` int(12) NOT NULL,
-  `OrderNumber` int(11) NOT NULL,
   `UserId` int(12) NOT NULL,
-  `OrderDetailsId` int(12) DEFAULT NULL
+  `OrderDetailsId` int(12) DEFAULT NULL,
+  `Total` int(32) NOT NULL,
+  `CreatedDate` datetime NOT NULL,
+  `Status` varchar(255) COLLATE utf8_polish_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_polish_ci;
+
+--
+-- Zrzut danych tabeli `orders`
+--
+
+INSERT INTO `orders` (`Id`, `UserId`, `OrderDetailsId`, `Total`, `CreatedDate`, `Status`) VALUES
+(14, 1, 14, 22000, '2018-06-24 12:24:46', 'DELIVERED'),
+(15, 5, 15, 33000, '2018-06-24 15:44:30', 'ACCEPTED');
+
+--
+-- Wyzwalacze `orders`
+--
+DELIMITER $$
+CREATE TRIGGER `SetCreatedDate` BEFORE INSERT ON `orders` FOR EACH ROW SET NEW.CreatedDate = NOW()
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -186,7 +225,9 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`Id`, `FirstName`, `LastName`, `Country`, `PostalCode`, `City`, `State`, `Street`, `HouseNumber`, `FlatNumber`, `PhoneNumber`, `Email`) VALUES
 (1, 'User', 'Password', 'Polska', '53-006', 'Wrocław', 'dolnośląskie', 'Agrestowa', '1', NULL, '123456789', 'user@password.pl'),
 (2, 'Login', 'Password', 'Polska', '52-215', 'Wrocław', 'dolnośląskie', 'Ametystowa', '1', '1', '987654321', 'login@password.pl'),
-(3, 'Account', 'Password1', 'Polska', '52-241', 'Wrocław', 'dolnośląskie', 'Andrzeja Małkowskiego', '1', 'b', '112358132', 'account@password1.pl');
+(3, 'Account', 'Password1', 'Polska', '52-241', 'Wrocław', 'dolnośląskie', 'Andrzeja Małkowskiego', '1', 'b', '112358132', 'account@password1.pl'),
+(4, 'salesman', 'salesman', 'SaleLand', '98-765', 'SalesCity', 'Saleso', 'Sales St.', '1', '2', '123456789', 'Salesman@Salesman.com'),
+(5, 'Admin', 'Admin', 'AdminLand', '12-345', 'AdminCity', 'Admino', 'Admin St.', '2', '1', '987654321', 'admin@admin.com');
 
 --
 -- Indeksy dla zrzutów tabel
@@ -257,49 +298,49 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT dla tabeli `cartitems`
 --
 ALTER TABLE `cartitems`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT dla tabeli `carts`
 --
 ALTER TABLE `carts`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT dla tabeli `logins`
 --
 ALTER TABLE `logins`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT dla tabeli `orderdetails`
 --
 ALTER TABLE `orderdetails`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `orderitems`
 --
 ALTER TABLE `orderitems`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT dla tabeli `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT dla tabeli `products`
 --
 ALTER TABLE `products`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT dla tabeli `users`
 --
 ALTER TABLE `users`
-  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `Id` int(12) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- Ograniczenia dla zrzutów tabel

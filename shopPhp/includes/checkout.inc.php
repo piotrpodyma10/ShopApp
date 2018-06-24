@@ -16,7 +16,9 @@
         $orderId = insertOrder($dbConnection, $userId, $cartItems);
         $orderDetailsId = insertOrderDetails($dbConnection, $orderId, $userId);
         insertOrderItems($dbConnection, $orderId, $cartItems);
-        clearCart($dbConnection);
+        clearCart($dbConnection);        
+        header("Location: ../orders.php?checkout=completed");
+        exit();
     }
 
     function insertOrder($dbConnection, $userId, $cartItems){
@@ -28,7 +30,7 @@
         $sql = "INSERT INTO Orders 
                     (UserId, Total, Status) 
                 VALUES
-                    ('$userId', '$total', 'Pending');";        
+                    ('$userId', '$total', 'NEW');";        
         mysqli_query($dbConnection, $sql);
         return mysqli_insert_id($dbConnection);
     }
