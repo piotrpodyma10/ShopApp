@@ -1,7 +1,11 @@
 <?php
+    include_once 'css.php';
     include_once 'header.php';
     include_once 'includes/dbConnection.inc.php';
     include_once 'includes/orders.inc.php';
+    include_once './style/additional.php';
+    
+    
 ?>
     <h1>Orders</h1>
     
@@ -27,16 +31,20 @@
                             <form action='includes/orders.inc.php' method='GET'>
                                 <input type='hidden' name='orderId' value='<?php echo $orders[$i]["Id"] ?>'/>
                                 <input type='hidden' name='action' value='CANCEL'/>
-                                <button type='submit' label='Cancel'>X</button>
+                                <button id="remove" type='submit' label='Cancel'>X</button>
                             </form>
                         <?php endif; ?>
                     </td>
                 </tr>
             <?php endfor; ?>
         </table>
+        <!-- <style>.banner{display:none;} body{background-color:black; color:white;}</style> -->
+        
     <?php else: ?>
         <h2> You have no Orders</h2>
-        Buy something here: <a href="catalogue.php">Catalogue</a>
+        Buy something here: <a href="index.php #target">Catalogue</a>
+        <!-- <style>.banner{display:none;} body{background-color:black; color:white;}</style> -->
+    
     <?php endif; ?>
 
 <?php

@@ -2,6 +2,7 @@
     if(!isset($_SESSION)){
         session_start();
     }
+    include_once 'css.php';
     include_once 'dbConnection.inc.php';
 
     $order = getOrder($dbConnection); 

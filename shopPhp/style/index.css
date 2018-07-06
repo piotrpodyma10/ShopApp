@@ -1,0 +1,486 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-weight: 500;
+    font-family: 'HelveticaNeue';
+}
+
+#fullPage {
+    height: 100vh;
+    overflow:hidden;
+}
+
+#fullPage section {
+    width: 100%;
+    padding: 0 7%;
+    display: table;
+    margin: 0;
+    max-width: none;
+    background-color: #373B44;
+    height: 100vh;
+}
+
+#fullPage section:nth-of-type(2n) {
+    background-color:#003f4c;
+}
+
+.intro {
+    height: 100vh;
+    width: 100%;
+}
+
+h1 {
+    font-size: 3em;
+    display: block;
+    color: white;
+    font-weight: 300;
+}
+
+p {
+    font-size: 1.5em;
+    font-weight: 500;
+    color: rgb(255, 255, 255);
+}
+
+/* a {
+    font-weight: 700;
+    color:white !important;
+    position: relative;
+}
+
+a:hover {
+    opacity: 0.8;
+    color:white !important;
+} */
+
+a:active {
+    top: 1px;
+}
+
+footer {
+    padding: 1% 5%;
+    text-align: center;
+    background-color: #373B44;
+    color: white;
+}
+
+footer a {
+    color: #FE4B74;
+    font-weight: 500;
+    text-decoration: none;
+}
+
+
+.typed_wrap {
+    margin-left: 300px;
+    width: 700px !important;
+    /* margin-top: 100px; */
+}
+
+#logo {
+    background: url("../img/logo.png");
+    overflow:hidden;
+    background-image: cover;
+    margin:0;
+    padding:0;
+    width:150px;
+    height: 120px;
+    background-size: cover;
+    margin-top:50px;
+}
+
+#logo_menu {
+    width: 100%;
+}
+
+#text_logo {
+    color:rgb(255, 255, 255);
+    font-size: 38px;
+    padding-bottom: 100px;
+    /* font-weight: bold; */
+}
+
+#test, #login_menu {
+    display:inline-block;
+}
+
+#login_menu {
+    float: right;
+    margin-top: 100px;
+    width:500px;
+    /* background-color:white; */
+}
+
+.logOutBtn {
+    border:solid 3px white;
+    background-color:black;
+    color:white;
+    transition:2s;
+    width:100px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.logOutBtn:hover {
+    background-color:white;
+    color:black;
+    transition: 2s;
+}
+
+.card {
+    width:100px;
+    height: 50px;
+    border:solid 3px white;
+    cursor: pointer;
+    transition: 2s;
+    color:white;
+}
+
+/* .card:hover {
+    background-color:white;
+    color:black !important;
+}
+
+#card a {
+    color:white !important;
+    text-decoration: none;
+}
+
+#card a:hover {
+    color:black !important;
+
+} */
+
+.text {
+    color:green !important;
+    font-size: 30px;
+    text-decoration: none !important;
+    transition:2s;
+}
+
+.text:hover {
+    color:black !important;
+    background-color:white;
+    text-decoration: none !important;
+    transition:2s;
+}
+
+
+.card {
+    color:rgb(255, 255, 255) !important;
+    background-color:rgb(0, 0, 0);
+    text-decoration: none !important;
+    font-size: 30px;
+    transition:2s;
+}
+
+.card:hover {
+    background-color:rgb(255, 255, 255);
+    color:rgb(0, 0, 0) !important;
+    transition:2s;
+    width: 100px !important;
+    text-decoration: none !important;
+}
+
+
+a {
+    text-decoration: none !important;
+} 
+
+#login_menu {
+    background-color: #000000;
+    /* width: 1000px; */
+    width: 880px;
+    height: 350px;
+    color: white !important;
+    border: 5px solid white;
+    padding: 10px;
+}
+
+.block {
+    height: 150px;
+    width:200px;
+    background-color: rgb(0, 0, 0);
+    color: white !important;
+    display: inline-block;
+    border:3px solid rgb(0, 186, 233);
+    margin: 5px !important;
+    padding:0;
+    transition: 2s;
+    font-weight: 700;
+    font-size:22px !important;
+    line-height: 150px;
+    text-align: center;
+}
+
+.block:hover {
+    background-color:rgb(0, 186, 233) !important;
+    border: 3px solid white !important;
+    transition:2s;
+}
+
+.block2 {
+    /* height: 310px; */
+    /* min-height: 150px;
+    max-height: 310px; */
+    /* width:200px; */
+    
+    /* height: 100%; */
+    height: 310px;
+    /* min-height: 150px;
+    max-height: 310px; */
+    position:relative;
+    /* width: 330px; */
+    width: 415px;
+    background-color: rgb(0, 0, 0);
+    color: rgb(255, 255, 255);
+    display: inline-block;
+    margin: 5px !important;
+    padding:0;
+    transition: 2s;
+    /* float:left; */
+    float: right;
+    cursor: pointer;
+    border:3px solid rgb(0, 186, 233);
+}
+
+.block2:hover {
+    background-color: rgb(0, 186, 233) !important;
+    border:3px solid rgb(255, 255, 255) !important;
+    /* max-height: 310px; */
+}
+
+#primary {
+    width: 425px;
+    height:330px;
+    display:inline-block;
+}
+
+#sec {
+    width: 425px;
+    height:330px;
+    display:inline-block;
+    float:right;
+}
+
+.block2 button {
+    background-color:rgb(0, 0, 0) !important;
+    text-decoration: none !important;
+    border: none !important;
+    /* max-height: 310px;
+    min-height: 150px; */
+    /* height: 100%; */
+    width: 100%;
+    color:white;
+    transition:2s;
+    cursor: pointer;
+    /* height: 100%; */
+    position:relative;
+    /* max-height: 304px;
+    min-height: 150px; */
+    height:100%;
+    
+}
+
+.block2 button:hover {
+    background-color: rgb(0, 186, 233) !important;
+    border-color:rgb(255, 255, 255) !important;
+    transition:2s;
+} 
+
+img {
+    height:100px;
+    width:150px;
+    margin-right: 20px;
+}
+
+#quantity {
+    width:140px;
+}
+
+#buy {
+    width:142px;
+    height:40px;
+    background-color:#66af00;
+    color:white;
+    cursor: pointer;
+    transition:2s;
+}
+
+#buy:hover {
+    background-color: greenyellow;
+    transition:2s;
+    color:black;
+    font-weight: bold;
+
+}
+
+.product {
+    padding: 10px; margin: 10px; 
+    display: inline-flex; width:500px; 
+    background-color: white; 
+    color: black; 
+    font-weight: bold;
+    border: solid 5px black;
+}
+
+.product:hover {
+    border:solid 5px lawngreen;
+}
+
+.icon-logout {
+    font-size: 22px;
+    font-weight: bold;
+}
+/*
+#primary a .block {
+    color: rgb(0, 248, 62) !important;
+    border:2px solid red !important;
+} */
+
+/* #primary a .block:hover {
+    color: rgb(255, 187, 0) !important;
+    border:2px solid rgb(253, 156, 0) !important;
+} */
+
+
+.content {
+    margin:0;
+    padding:0;
+    width:100%;
+    height:100;
+}
+
+
+
+#footer {
+    background-color: white;
+    height: 50px;
+    width: 100%;
+    position: fixed;
+    margin-left: 0 !important;
+    padding: 0 !important;
+    bottom: 0%;
+    left: 0%;
+    color:black;
+    /* text-align: center; */
+    line-height:50px;
+    font-weight:bold;
+    font-size:20px;
+}
+
+.icon-facebook-rect {
+    background-color:white;
+    font-size:20px;
+    float:left;
+    cursor:pointer;
+    transition:2s;
+}
+.icon-twitter{
+    background-color:white;
+    font-size:20px;
+    float:left;
+    cursor:pointer;
+    transition:2s;
+}
+.icon-email{
+    background-color:white;
+    font-size:20px;
+    float:left;
+    cursor:pointer;
+    transition:2s;
+}
+.icon-copyright {
+    background-color:white;
+    font-size:20px;
+    float:left;
+    cursor:pointer;
+}
+
+
+
+
+.icon-facebook-rect
+.icon-twitter
+.icon-email {
+    background-color:yellow !important;
+    font-size:20px;
+    float:left;
+    line-height:50px;
+    margin-left:40%;
+    text-align:center;
+    transition:2s;
+    
+    
+}
+
+.icon-facebook-rect {
+    margin-left:40%;
+}
+
+.icon-facebook-rect:hover
+ {
+    background-color:rgb(0, 186, 233);
+    color:white;
+    transition:2s;
+    
+}
+.icon-twitter:hover {
+    background-color:black;
+    color:white;
+    transition:2s;
+}
+.icon-email:hover {
+    background-color:orange;
+    color:white;
+    transition:2s;
+}
+
+/* .icon-twitter{
+    background-color:green;
+    font-size:20px;
+    float:left;
+    line-height:50px;
+    
+}
+.icon-email{
+    background-color:green;
+    font-size:20px;
+    float:left;
+    line-height:50px;
+    
+}
+.icon-copyright {
+    background-color:green;
+    font-size:20px;
+    float:left;
+    line-height:50px;
+    
+} */
+
+#footerBox {
+    height:50px;
+    width:100%;
+
+}
+
+.icon {
+    width:50px;
+    height:50px;
+    background-color:white;
+    line-height:50px;
+    
+}
+#footerText {
+    float:left;
+}
+
+[class^="icon-"]:before, [class*=" icon-"]:before {
+    line-height: 50px !important;
+    text-align:center !important;
+    padding-left:10px;
+    
+}

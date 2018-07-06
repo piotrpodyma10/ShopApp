@@ -28,7 +28,7 @@
 
     function checkPost(){
         if(!isset($_POST['submit'])){
-            header("Location: ../signUp.php");
+            header("Location: ../index.php?signUp=success");
             exit();
         }
     }
@@ -87,7 +87,7 @@
                     ('$login', '$hashedPassword', '$userId', 'user');";
         $isSuccess = mysqli_query($dbConnection, $sql);
         if($isSuccess){
-            header("Location: ../signUp.php?signup=success");
+            header("Location: ../index.php?signUp=success");
         } else {
             header("Location: ../signUp.php?signup=failed");
         }

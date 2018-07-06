@@ -36,6 +36,7 @@ function signIn($login, $password, $dbConnection){
                 $_SESSION["role"] = $row["Role"];
                 $_SESSION["cartId"] = getCartId($dbConnection);
                 header("Location: ../index.php?login=success");
+                //header("Location: ../signUp.php");
                 exit();
             }else{
                 header("Location: ../index.php?login=invalidData");

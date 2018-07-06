@@ -1,10 +1,12 @@
 <?php
+    include_once 'css.php';
     include_once 'header.php';
     include_once 'includes/dbConnection.inc.php';
     include_once 'includes/usersManagement.inc.php';
+    include_once './style/additional.php';
 ?>
     <h1>Users Management</h1>
-    
+    <div>
     <table>
         <thead>
             <th>User Name</th>
@@ -21,7 +23,7 @@
                             <input type='hidden' name='userId' value='<?php echo $users[$i]["Id"] ?>'/>
                             <input type='hidden' name='currentRole' value='<?php echo $users[$i]["Role"] ?>'/>
                             <input type='hidden' name='action' value='DEMOTE'/>
-                            <button type='submit' label='Demote'>↓</button>
+                            <button id="down" type='submit' label='Demote'>↓</button>
                         </form>
                     <?php endif; ?>
                     
@@ -30,14 +32,22 @@
                             <input type='hidden' name='userId' value='<?php echo $users[$i]["Id"] ?>'/>
                             <input type='hidden' name='currentRole' value='<?php echo $users[$i]["Role"] ?>'/>
                             <input type='hidden' name='action' value='PROMOTE'/>
-                            <button type='submit' label='Promote'>↑</button>
+                            <button id="up" type='submit' label='Promote'>↑</button>
                         </form>
                     <?php endif; ?>
                 </td>
             </tr>
         <?php endfor; ?>
+        <!-- <style>.banner{display:none;} body{background-color:black; color:white; font-size:20px;} a{color:lawngreen; text-decoration: underline }</style> -->
+        
     </table>
 
-<?php
-    include_once 'footer.php';
-?>
+</div>
+<div id="footer">
+                <div id="footerBox">
+                    <div class="icon-facebook-rect icon"></div>
+                    <div class="icon-twitter icon"></div>
+                    <div class="icon-email icon"></div>
+                    <div class="footerText">Brave King</div>
+                </div>
+</div>

@@ -2,6 +2,7 @@
     include_once 'header.php';
     include_once 'includes/dbConnection.inc.php';
     include_once 'includes/orderDetails.inc.php';
+    include_once './style/additional.php';
 ?>
     <h1>Orders Management</h1>
     
